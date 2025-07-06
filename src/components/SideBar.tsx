@@ -19,19 +19,22 @@ const getMimeType = (filename: string): string => {
 };
 
 const SideBar = ({ audioFiles }: { audioFiles: AudioFile[] }) => {
-  console.log(audioFiles);
   JSON.stringify(audioFiles);
 
   return (
-    <div className="w-1/3 bg-gray-50 p-4">
-      <h2 className="font-bold mb-2">🎵 Твої аудіофайли</h2>
-      <ul className="space-y-3">
+    <div className="md:w-1/3 w-full bg-gray-50 p-6 rounded-lg shadow-md">
+      <h2 className="text-lg font-semibold text-purple-700 mb-4 text-center md:text-center">
+        Your audio files
+      </h2>
+      <ul className="space-y-4">
         {audioFiles.map((file, index) => (
-          <li key={file.id} className="flex items-center gap-2">
-            <span>📁 AudioFile {index + 1}</span>
+          <li key={file.id} className="space-y-2">
+            <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+              <span>📁 AudioFile {index + 1}</span>
+            </div>
             <audio controls className="w-full">
               <source src={file.url} type={getMimeType(file.url)} />
-              Твій браузер не підтримує програвач
+              Your browser does not support the audio player
             </audio>
           </li>
         ))}

@@ -10,7 +10,6 @@ export default async function DashboardPage() {
   const { userId } = await auth();
 
   if (!userId) return <div>Not authorized</div>;
-  console.log("Clerk userId:", userId);
 
   const user = await prisma.user.findUnique({
     where: { clerkId: userId },
@@ -23,12 +22,10 @@ export default async function DashboardPage() {
     orderBy: { createdAt: "desc" },
   });
 
-  console.log("audioFiles:", audioFiles);
-
   return (
     <div className="flex">
       {audioFiles.length === 0 ? (
-        <p>Немає аудіофайлів</p>
+        <p>No audio files</p>
       ) : (
         <SideBar audioFiles={audioFiles} />
       )}
@@ -40,7 +37,7 @@ export default async function DashboardPage() {
               <p className="text-sm text-gray-600">
                 {file.createdAt.toLocaleString()}
               </p>
-              <p className="text-lg">{file.text || "Немає тексту"}</p>
+              <p className="text-lg">{file.text || "No text"}</p>
             </div>
           ))}
         </div>

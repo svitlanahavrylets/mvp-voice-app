@@ -9,6 +9,7 @@ import {
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,24 +37,34 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex justify-end items-center p-4 gap-4 h-16 border-b">
-            <SignedOut>
-              <SignInButton>
-                <button className="bg-blue-600 text-white rounded-full px-4 py-2 text-sm hover:bg-blue-700 transition">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton>
-                <button className="bg-purple-600 text-white rounded-full px-4 py-2 text-sm hover:bg-purple-700 transition">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+          <header>
+            <div className="flex justify-between items-center p-4 gap-4 h-26 border-b">
+              <Image
+                src="/MusicStudio.png"
+                alt="Whispr Logo"
+                width={130}
+                height={130}
+                className="flex justify-start p-4"
+              />
+              <div className=" gap-4 flex items-center">
+                <SignedOut>
+                  <SignInButton>
+                    <button className="bg-blue-600 text-white rounded-full px-4 py-2 text-sm hover:bg-blue-700 transition">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton>
+                    <button className="bg-purple-600 text-white rounded-full px-4 py-2 text-sm hover:bg-purple-700 transition">
+                      Sign Up
+                    </button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+              </div>
+            </div>
           </header>
-
           <main>{children}</main>
         </body>
       </html>

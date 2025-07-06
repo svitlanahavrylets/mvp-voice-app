@@ -28,8 +28,6 @@ export async function POST(req: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session;
     const clerkId = session.metadata?.clerkId;
 
-    console.log("✅ Stripe payment completed for:", clerkId);
-
     if (clerkId) {
       await prisma.user.update({
         where: { clerkId },
