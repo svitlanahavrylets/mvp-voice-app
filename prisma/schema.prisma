@@ -12,7 +12,7 @@ model User {
   clerkId    String      @unique
   createdAt  DateTime    @default(now())
   audioFiles AudioFile[] 
-   hasPaid    Boolean     @default(false)
+  hasPaid    Boolean     @default(false)
 }
 
 model AudioFile {

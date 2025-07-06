@@ -15,11 +15,13 @@ export async function POST(req: NextRequest) {
   if (!userId)
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
-  let user = await prisma.user.findUnique({ where: { clerkId: userId } });
+  const existingUser = await prisma.user.findUnique({
+    where: { clerkId: userId },
+  });
 
-  if (!user) {
-    user = await prisma.user.create({ data: { clerkId: userId } });
-  }
+  const user = existingUser
+    ? existingUser
+    : await prisma.user.create({ data: { clerkId: userId } });
 
   const count = await prisma.audioFile.count({ where: { userId: user.id } });
 
