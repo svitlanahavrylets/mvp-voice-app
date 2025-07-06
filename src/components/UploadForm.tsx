@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { AudioFile } from "@prisma/client";
 
 export function UploadForm({
@@ -10,6 +10,17 @@ export function UploadForm({
 }) {
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get("success");
+    const shouldRetry = localStorage.getItem("retryUpload");
+
+    if (success === "true" && shouldRetry && selectedFile) {
+      handleUpload();
+      localStorage.removeItem("retryUpload");
+    }
+  }, []);
 
   const handleUpload = async () => {
     if (!selectedFile) return;
@@ -27,6 +38,7 @@ export function UploadForm({
       if (res.status === 403) {
         const data = await res.json();
         if (data.redirectToCheckout) {
+          localStorage.setItem("retryUpload", "true");
           await handleUpgrade();
           return;
         }

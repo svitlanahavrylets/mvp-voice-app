@@ -50,11 +50,16 @@
 │   ├── app/
 │   │   ├── api/
 │   │   │   ├── checkout/
+│   │   │   │   └── route.ts
 │   │   │   ├── upload/
+│   │   │   │   └── route.ts
 │   │   │   └── webhook/
+│   │   │       └── route.ts
 │   │   └── dashboard/
+│   │   │   ├── page.tsx
+│   │   │   └── DashboardClient.tsx
 │   ├── components/
-│   │   ├── ui/
+│   │   ├── SideBar.tsx
 │   │   └── UploadForm.tsx
 │   └── lib/
 │       └── middleware.ts
