@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { UploadForm } from "@/components/UploadForm";
 import SideBar from "../../components/SideBar";
+import type { AudioFile } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ export default async function DashboardPage() {
 
   if (!user) return <div>Not authorized</div>;
 
-  const audioFiles = await prisma.audioFile.findMany({
+  const audioFiles: AudioFile[] = await prisma.audioFile.findMany({
     where: { userId: user.id },
     orderBy: { createdAt: "desc" },
   });
