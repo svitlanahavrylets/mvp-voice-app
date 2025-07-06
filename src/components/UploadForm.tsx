@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import type { AudioFile } from "@prisma/client";
 
-export function UploadForm() {
+export function UploadForm({
+  onUploadSuccess,
+}: {
+  onUploadSuccess: (file: AudioFile) => void;
+}) {
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -29,6 +34,7 @@ export function UploadForm() {
 
       const data = await res.json();
       alert("Result: " + data.text);
+      onUploadSuccess(data);
     } catch (error) {
       alert("Upload error: " + (error as Error).message);
     } finally {

@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎤 WHISPR Voice App
 
-## Getting Started
+> AI-based Voice-to-Text SaaS MVP using Next.js, OpenAI, Stripe, and Clerk
 
-First, run the development server:
+## 🔗 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+👉 [https://mvp-voice-app.vercel.app](https://mvp-voice-app.vercel.app)
+
+## 🧠 About the App
+
+**WHISPR** is an MVP web application that allows users to upload voice recordings and receive real-time transcriptions using AI (OpenAI Whisper API). Each user has a personal account with their own audio playlist.
+
+- 🔐 Authentication via [Clerk.dev](https://clerk.dev)
+- 📼 Upload audio files (.mp3, .wav, etc.)
+- 🧠 Transcription using OpenAI Whisper
+- 💾 History of uploaded audio files saved in PostgreSQL
+- 💰 2 free transcriptions, then Stripe payment required
+- 🔁 Stripe Webhook updates `hasPaid` status after payment
+
+## ✨ Features
+
+- ✅ User sign up/sign in
+- ✅ Audio file upload with validation
+- ✅ Audio-to-text transcription via AI
+- ✅ Personal dashboard with past uploads
+- ✅ 2 free transcriptions
+- ✅ Stripe one-time payment integration
+- ✅ Webhook to unlock further uploads
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js 14, TypeScript, TailwindCSS, ShadCN UI
+- **Backend:** API Routes (Next.js App Router)
+- **Authentication:** Clerk
+- **Payments:** Stripe (Checkout + Webhook)
+- **Database:** PostgreSQL + Prisma ORM
+- **AI API:** OpenAI Whisper
+- **Deployment:** Vercel
+
+## 📁 Project Structure
+
+```
+📦 MVP-VOICE-APP
+├── prisma/
+│   ├── schema.prisma
+│   └── migrations/
+├── public/
+│   └── MusicStudio.png
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── checkout/
+│   │   │   ├── upload/
+│   │   │   └── webhook/
+│   │   └── dashboard/
+│   ├── components/
+│   │   ├── ui/
+│   │   └── UploadForm.tsx
+│   └── lib/
+│       └── middleware.ts
+├── .env
+├── next.config.ts
+├── tsconfig.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧪 Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone https://github.com/svitlanahavrylets/your-repo-name.git
+cd your-repo-name
+```
 
-## Learn More
+2. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Configure environment variables:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create `.env` file:
 
-## Deploy on Vercel
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+OPENAI_API_KEY=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_BASE_URL=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_UPLOAD_PRESET=
+```
+
+4. **Start the development server:**
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+npm run dev
+```
+
+## 💳 Stripe (test mode)
+
+- First 2 uploads are free
+- After that, prompt user for one-time payment ($20)
+- Webhook updates `hasPaid = true` in DB
+
+## 📩 Contact
+
+Created by [Svitlana Havrylets](mailto:svitlana.havrylets@gmail.com)

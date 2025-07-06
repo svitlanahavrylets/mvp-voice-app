@@ -22,7 +22,7 @@ const SideBar = ({ audioFiles }: { audioFiles: AudioFile[] }) => {
   JSON.stringify(audioFiles);
 
   return (
-    <div className="md:w-1/3 w-full bg-gray-50 p-6 rounded-lg shadow-md">
+    <div className="">
       <h2 className="text-lg font-semibold text-purple-700 mb-4 text-center md:text-center">
         Your audio files
       </h2>
